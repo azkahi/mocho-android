@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "355325297596",
+    "firebase_url": "https://mocho-17c52.firebaseio.com",
+    "project_id": "mocho-17c52",
+    "storage_bucket": "mocho-17c52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355325297596:android:0570bbe12428dd9e",
+        "android_client_info": {
+          "package_name": "com.araara.mocho"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "355325297596-14pk5gsutd45o1sgq431ferhsd7t6hoi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.araara.mocho",
+            "certificate_hash": "D4EB35154B58BB476D731C5057D2A2F48B3C4080"
+          }
+        },
+        {
+          "client_id": "355325297596-n1u3vr0do3cnc95dv5h263vk196oheln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlm4nIPEHrRQuHEUeGY6HZddyS6Rht1hY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "355325297596-n1u3vr0do3cnc95dv5h263vk196oheln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
