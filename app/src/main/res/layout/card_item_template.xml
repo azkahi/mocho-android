@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="1dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:elevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/img_background"
+                android:src="@drawable/bg"
+                android:scaleType="centerCrop"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:transitionName="selectedMonster"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#000000"
+                android:alpha=".4"
+                android:id="@+id/vw_blacklayer" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="150dp"
+                android:layout_height="110dp"
+                android:id="@+id/img_cover_d"
+                android:src="@drawable/puta"
+                android:scaleType="centerCrop"
+                app:riv_border_width="2dip"
+                app:riv_border_color="#ffffff"
+                android:layout_marginBottom="12dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="13dp"
+                android:layout_marginStart="13dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Puta"
+                android:id="@+id/txt_monster_details"
+                android:maxLines="1"
+                android:layout_marginTop="6dp"
+                android:paddingLeft="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:layout_alignTop="@+id/img_cover_d"
+                android:layout_toRightOf="@+id/img_cover_d"
+                android:layout_toEndOf="@id/img_cover_d" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="HP: \tSP: \nAtk: Def: Rec: "
+                android:id="@+id/txt_monster_desc"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:lines="3"
+                android:textSize="20sp"
+                android:ellipsize="end"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/txt_monster_details"
+                android:layout_toRightOf="@+id/img_cover_d"
+                android:layout_toEndOf="@+id/img_cover_d" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar2"
+                android:layout_marginBottom="32dp"
+                android:layout_above="@+id/img_cover_d"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:lines="3"
+                android:textSize="20sp"
+                android:ellipsize="end"
+                android:textColor="#ffffff"
+                android:layout_above="@+id/img_cover_d"
+                android:layout_alignLeft="@+id/textView"
+                android:layout_alignStart="@+id/textView" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textView"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:lines="3"
+                android:textSize="20sp"
+                android:ellipsize="end"
+                android:textColor="#ffffff"
+                android:layout_above="@+id/progressBar2"
+                android:layout_centerHorizontal="true" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:layout_above="@+id/textView2"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

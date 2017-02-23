@@ -9,22 +9,22 @@ public class Monster {
     private String type;
     private String subtype;
     private int hunger;
-    private int maxHP;
-    private int maxSP;
+    private int HP;
+    private int SP;
     private int exp;
-    private int offense;
+    private int attack;
     private int defense;
     private int recovery;
 
-    public Monster(String name, String type, String subtype, int hunger, int maxHP, int maxSP, int exp, int offense, int defense, int recovery) {
+    public Monster(String name, String type, String subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery) {
         this.name = name;
         this.type = type;
         this.subtype = subtype;
         this.hunger = hunger;
-        this.maxHP = maxHP;
-        this.maxSP = maxSP;
+        this.HP = HP;
+        this.SP = SP;
         this.exp = exp;
-        this.offense = offense;
+        this.attack = attack;
         this.defense = defense;
         this.recovery = recovery;
     }
@@ -61,37 +61,36 @@ public class Monster {
         this.hunger = hunger;
     }
 
-    public int getMaxHP() {
-        return maxHP;
+    public int getHP() {
+        return HP;
     }
 
-    public void setMaxHP(int maxHP) {
-        this.maxHP = maxHP;
+    public void setHP(int HP) {
+        this.HP = HP;
     }
 
-    public int getMaxSP() {
-        return maxSP;
+    public int getSP() {
+        return SP;
     }
 
-    public void setMaxSP(int maxSP) {
-        this.maxSP = maxSP;
+    public void setSP(int SP) {
+        this.SP = SP;
     }
 
     public int getExp() {
         return exp;
     }
 
-    public void increaseExp(int exp) {
-        this.exp = this.exp + exp;
-        if
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 
-    public int getOffense() {
-        return offense;
+    public int getAttack() {
+        return attack;
     }
 
-    public void setOffense(int offense) {
-        this.offense = offense;
+    public void setAttack(int attack) {
+        this.attack = attack;
     }
 
     public int getDefense() {

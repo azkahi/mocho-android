@@ -16,7 +16,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DetailGameActivity"></activity>
     </application>
 
 </manifest>
