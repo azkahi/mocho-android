@@ -42,11 +42,9 @@
                 android:scaleType="centerCrop"
                 app:riv_border_width="2dip"
                 app:riv_border_color="#ffffff"
-                android:layout_marginLeft="14dp"
                 android:layout_marginStart="14dp"
                 android:id="@+id/monster_details"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="157dp" />
 
@@ -57,11 +55,10 @@
                 android:text="Puta"
                 android:id="@+id/monster_name"
                 android:maxLines="1"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:textSize="20sp"
                 android:textColor="#ffffff"
                 android:layout_alignBottom="@+id/cover_bg_details"
-                android:layout_toRightOf="@+id/monster_details"
                 android:layout_toEndOf="@+id/monster_details"
                 android:layout_marginBottom="10dp" />
 
@@ -71,12 +68,11 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Description to be added."
                 android:id="@+id/desc"
-                android:layout_marginLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_marginStart="10dp"
+                android:paddingEnd="10dp"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
                 android:layout_below="@+id/cover_bg_details"
-                android:layout_toRightOf="@+id/monster_details"
                 android:layout_toEndOf="@+id/monster_details"
                 />
 

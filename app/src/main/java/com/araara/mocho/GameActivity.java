@@ -60,12 +60,12 @@ public class GameActivity extends AppCompatActivity {
 
                 //We are passing Bundle to activity, these lines will animate when we laucnh activity
                 Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(GameActivity.this,
-                        Pair.create(view,"selectedMovie")
+                        Pair.create(view,"selectedMonster")
                 ).toBundle();
 
                 Intent intent = new Intent(GameActivity.this,DetailGameActivity.class);
-                intent.putExtra("cover",monsterList[i].getName());
-                startActivity(intent,bundle);
+                intent.putExtra("cover", monsterList[i].getName());
+                startActivity(intent);
 
             }
         });
