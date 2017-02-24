@@ -1,0 +1,73 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.araara.mocho.SensorMenuFragment"
+    android:id="@+id/fragmentSensorMenu">
+
+    <ImageButton
+        app:srcCompat="@drawable/sword"
+        android:id="@+id/btnAtk"
+        android:scaleType="fitCenter"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvSensorMenuPrompt"
+        android:layout_width="185dp"
+        android:layout_height="185dp" />
+
+    <ImageButton
+        app:srcCompat="@drawable/shield"
+        android:id="@+id/btnDef"
+        android:scaleType="fitCenter"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvAtk"
+        android:layout_width="185dp"
+        android:layout_height="185dp" />
+
+    <TextView
+        android:text="Select Training Type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvSensorMenuPrompt"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="ATK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvAtk"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnAtk"
+        app:layout_constraintRight_toRightOf="@+id/btnAtk"
+        app:layout_constraintLeft_toLeftOf="@+id/btnAtk" />
+
+    <TextView
+        android:text="DEF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvDef"
+        app:layout_constraintTop_toBottomOf="@+id/btnDef"
+        app:layout_constraintRight_toRightOf="@+id/btnDef"
+        app:layout_constraintLeft_toLeftOf="@+id/btnDef"
+        android:layout_marginTop="8dp" />
+</android.support.constraint.ConstraintLayout>
