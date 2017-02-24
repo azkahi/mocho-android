@@ -4,11 +4,19 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.ChangeBounds;
+import android.transition.Scene;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
+import android.transition.TransitionManager;
 import android.util.Log;
-import android.util.Pair;
+import android.support.v4.util.Pair;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -26,6 +34,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSharedElementEnterTransition(enterTransition());
+        getWindow().setSharedElementReturnTransition(returnTransition());
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         try {
@@ -54,20 +64,44 @@ public class GameActivity extends AppCompatActivity {
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 //We are passing Bundle to activity, these lines will animate when we laucnh activity
-                Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(GameActivity.this,
-                        Pair.create(view,"selectedMonster")
-                ).toBundle();
+
+
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(GameActivity.this, Pair.create(view, "selectedMonster"));
+
+                Transition transition =  TransitionInflater.from(GameActivity.this).
+                        inflateTransition(R.transition.card_exit);
 
                 Intent intent = new Intent(GameActivity.this,DetailGameActivity.class);
-                intent.putExtra("cover", monsterList[i].getName());
-                startActivity(intent);
+                //intent.putExtra("cover", monsterList[i].getName());
+                //ViewGroup mRoot = (ViewGroup) findViewById(R.id.scene_root);
+
+                //Scene mAScene = Scene.getSceneForLayout(mRoot, R.layout.activity_game, GameActivity.this);
+                //Scene mAnotherScene = Scene.getSceneForLayout(mRoot, R.layout.activity_detail_game, GameActivity.this);
+                //TransitionManager.go(mAnotherScene, transition);
+                startActivity(intent, options.toBundle());
+
 
             }
         });
+    }
+
+    private Transition enterTransition() {
+        ChangeBounds bounds = new ChangeBounds();
+        bounds.setDuration(2000);
+
+        return bounds;
+    }
+
+    private Transition returnTransition() {
+        ChangeBounds bounds = new ChangeBounds();
+        bounds.setInterpolator(new DecelerateInterpolator());
+        bounds.setDuration(2000);
+
+        return bounds;
     }
 }

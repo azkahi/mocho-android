@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/inaidle222" android:oneshot="false">
+    <item android:drawable="@drawable/inaidle1" android:duration="100" />
+    <item android:drawable="@drawable/inaidle2" android:duration="100" />
+    <item android:drawable="@drawable/inaidle3" android:duration="100" />
+    <item android:drawable="@drawable/inaidle4" android:duration="100" />
+    <item android:drawable="@drawable/inaidle5" android:duration="100" />
+    <item android:drawable="@drawable/inaidle6" android:duration="100" />
+    <item android:drawable="@drawable/inaidle7" android:duration="100" />
+    <item android:drawable="@drawable/inaidle8" android:duration="100" />
+</animation-list>

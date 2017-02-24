@@ -102,10 +102,10 @@ public class MonsterAdapter extends BaseAdapter {
         holder._hunger.setProgress(monsterList[idxMonster].getHunger());
         holder._exp.setMax(100);
         holder._exp.setProgress(monsterList[idxMonster].getExp() % 100);
-        holder._cover.setImageResource(DataModel.cover[idxInitMonster]);
-        //Picasso.with(context).load(DataModel.cover[idxInitMonster]).into(holder._cover);
-        holder._background.setImageResource(DataModel.background[0]);
-        //Picasso.with(context).load(DataModel.background[0]).into(holder._background);
+        //holder._cover.setImageResource(DataModel.cover[idxInitMonster]);
+        Picasso.with(context).load(DataModel.cover[idxInitMonster]).into(holder._cover);
+        //holder._background.setImageResource(DataModel.background[0]);
+        Picasso.with(context).load(DataModel.background[0]).into(holder._background);
 
 
         ObjectAnimator fade = ObjectAnimator.ofFloat(holder._vw_blayer, View.ALPHA, 1f,.3f);
