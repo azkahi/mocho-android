@@ -66,7 +66,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".SubtypeActivity"></activity>
+        <activity android:name=".SubtypeActivity" />
+        <activity android:name=".FeedActivity"></activity>
     </application>
 
 </manifest>

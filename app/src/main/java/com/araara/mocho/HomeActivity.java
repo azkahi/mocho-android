@@ -44,13 +44,17 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        Intent intent;
         switch (id) {
             case R.id.itemMonsters:
                 Log.d(TAG, "onOptionsItemSelected: monsters");
+                intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.itemLottery:
                 Log.d(TAG, "onOptionsItemSelected: lottery");
-                Intent intent = new Intent(this, SensorActivity.class);
+                intent = new Intent(this, SensorActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -145,9 +149,6 @@ public class HomeActivity extends AppCompatActivity {
             progressDialog.hide();
             if (s.equals("OK")) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
             }
         }
     }

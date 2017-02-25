@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 
 public class DetailGameActivity extends AppCompatActivity implements DetailMenu.OnMenuClickedListener {
     public static final String TAG = "DetailGameActivtity";
+    int idx = -1;
     SharedPreferences sharedPreferences;
     Monster[] monstersList;
     AnimationDrawable frameAnimation;
@@ -40,7 +41,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         if (!parseMonsterString.equals("NONE")) monstersList = DataModel.parseMonster(parseMonsterString);
 
         Intent intent = getIntent();
-        int idx = intent.getIntExtra("idxmonster", -1);
+        idx = intent.getIntExtra("idxmonster", -1);
 
         if (idx != -1) {
             int idxmonster = DataModel.getIdxMonster(monstersList[idx].getName());
@@ -103,14 +104,12 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         if (menu.equals("TRAIN")) {
             fragment = new SensorMenuFragment();
         } else if(menu.equals("FEED")) {
-            fragment = new AccelerometerFragment();
+            Intent intent = new Intent(DetailGameActivity.this, FeedActivity.class);
+            intent.putExtra("idxmonster", idx);
+            startActivity(intent);
         } else {
             // Insert fragment map here
             fragment = new GyroFragment();
         }
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 }
