@@ -38,7 +38,6 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     public static final String TAG = LocationServiceActivity.class.getSimpleName();
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-
     private Location mLastLocation;
     private Marker mCurrLocationMarker;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -318,6 +317,20 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     protected void onPause() {
         super.onPause();
         stopLocationUpdates();
+        Log.i(TAG, "Kena Pause");
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Log.i(TAG, "Kena Resume");
+        if(mLocationRequest != null && mGoogleApiClient != null) {
+            if (ContextCompat.checkSelfPermission(this,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
+        }
     }
 
     protected void stopLocationUpdates() {
