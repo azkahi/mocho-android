@@ -60,7 +60,6 @@ public class MonsterAdapter extends BaseAdapter {
             holder._monsterdesc = (TextView) convertview.findViewById(R.id.txt_monster_desc);
             holder._hunger = (ProgressBar) convertview.findViewById(R.id.progressBar);
             holder._exp = (ProgressBar) convertview.findViewById(R.id.progressBar2);
-            holder._vw_blayer =  convertview.findViewById(R.id.vw_blacklayer);
             holder._txt1 = (TextView) convertview.findViewById(R.id.textView);
             holder._txt2 = (TextView) convertview.findViewById(R.id.textView2);
 
@@ -104,11 +103,6 @@ public class MonsterAdapter extends BaseAdapter {
         Picasso.with(context).load(DataModel.background[0]).into(holder._background);
 
 
-        ObjectAnimator fade = ObjectAnimator.ofFloat(holder._vw_blayer, View.ALPHA, 1f,.3f);
-        fade.setDuration(1500);
-        fade.setInterpolator(new LinearInterpolator());
-        fade.start();
-
 
         return convertview;
     }
@@ -123,7 +117,6 @@ public class MonsterAdapter extends BaseAdapter {
         TextView _monsterdesc;
         ProgressBar _hunger;
         ProgressBar _exp;
-        View _vw_blayer;
 
 
     }
