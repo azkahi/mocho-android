@@ -8,11 +8,13 @@ import android.util.Log;
 
 public class SensorActivity extends AppCompatActivity implements SensorMenuFragment.OnMenuClickedListener {
     private static final String TAG = "SensorActivity";
+    int idx;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+        idx = getIntent().getIntExtra("idxmonster", 0);
 
         if (findViewById(R.id.fragment_container) != null) {
             Log.d(TAG, "onCreate: creating fragment");
@@ -36,6 +38,10 @@ public class SensorActivity extends AppCompatActivity implements SensorMenuFragm
         } else {
             fragment = new AccelerometerFragment();
         }
+        Bundle bundle = new Bundle();
+        bundle.putInt("idxmonster", idx);
+        fragment.setArguments(bundle);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
