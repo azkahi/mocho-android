@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private TextView tvWelcome;
     private Button btnSignOut;
+    private Button btnMap;
     private SensorManager sensorManager;
 
     @Override
@@ -63,6 +64,7 @@ public class HomeActivity extends AppCompatActivity {
 
         tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
+        btnMap = (Button) findViewById(R.id.btnMap);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -83,6 +85,14 @@ public class HomeActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 SignOutTask signOutTask = new SignOutTask();
                 signOutTask.execute(user.getDisplayName());
+            }
+        });
+
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, LocationServiceActivity.class);
+                startActivity(intent);
             }
         });
 
