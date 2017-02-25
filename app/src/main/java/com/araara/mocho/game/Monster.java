@@ -1,10 +1,12 @@
 package com.araara.mocho.game;
 
+import java.io.Serializable;
+
 /**
  * Created by Azka Hanif Imtiyaz on 2/20/2017.
  */
 
-public class Monster {
+public class Monster implements Serializable {
     private String name;
     private String type;
     private String subtype;

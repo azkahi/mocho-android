@@ -2,8 +2,6 @@ package com.araara.mocho.game;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +13,6 @@ import android.widget.TextView;
 
 import com.araara.mocho.R;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by Azka Hanif Imtiyaz on 2/24/2017.

@@ -1,19 +1,16 @@
 package com.araara.mocho;
 
-import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.ChangeBounds;
 import android.transition.Transition;
 import android.view.animation.DecelerateInterpolator;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetailGameActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
