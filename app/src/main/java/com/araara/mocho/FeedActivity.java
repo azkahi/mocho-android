@@ -33,13 +33,22 @@ public class FeedActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     ProgressDialog progressDialog;
 
+
+    final UpdateHunger updateHunger = new UpdateHunger();
     int meat, rice;
-    int idx;
+    int idx, idxserver;
     ImageButton meatButton;
     ImageButton riceButton;
     TextView meatQty;
     TextView riceQty;
     Monster[] tempMonster;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        updateHunger.execute("TES");
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +76,6 @@ public class FeedActivity extends AppCompatActivity {
 
         tempMonster = DataModel.parseMonster(res);
 
-        final UpdateHunger updateHunger = new UpdateHunger();
 
         meatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +86,6 @@ public class FeedActivity extends AppCompatActivity {
                 } else {
                     if (tempMonster.length >= 0) {
                         tempMonster[idx].setHunger(tempMonster[idx].getHunger() + 100);
-                        updateHunger.execute("TES");
                     }
                     meatQty.setText("" + meat);
                 }
@@ -93,7 +100,6 @@ public class FeedActivity extends AppCompatActivity {
                 } else {
                     if (tempMonster.length >= 0) {
                         tempMonster[idx].setHunger(tempMonster[idx].getHunger() + 50);
-                        updateHunger.execute("TES");
                     }
                     riceQty.setText("" + rice);
                 }
@@ -175,7 +181,7 @@ public class FeedActivity extends AppCompatActivity {
             try {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Log.d("TES", "STARTINGTEST");
-                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + user + "/monsters/" + idx);
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + user + "/monsters/" + tempMonster[idx].getId());
 
                 Log.d("Connect", "start");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -17,8 +17,13 @@ public class Monster implements Serializable {
     private int attack;
     private int defense;
     private int recovery;
+    private int id;
 
-    public Monster(String name, String type, String subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery) {
+    public int getId() {
+        return id;
+    }
+
+    public Monster(String name, String type, String subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery, int id) {
         this.name = name;
         this.type = type;
         this.subtype = subtype;
@@ -29,6 +34,7 @@ public class Monster implements Serializable {
         this.attack = attack;
         this.defense = defense;
         this.recovery = recovery;
+        this.id = id;
     }
 
     public String getName() {

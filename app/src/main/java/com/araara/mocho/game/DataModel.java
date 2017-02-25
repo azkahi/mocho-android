@@ -67,8 +67,9 @@ public class DataModel {
                 int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP");
                 int exp = ArrayMonster.getJSONObject(i).getInt("exp");
                 int hunger = ArrayMonster.getJSONObject(i).getInt("hunger");
+                int id = ArrayMonster.getJSONObject(i).getInt("id");
                 monsterList[i] = new Monster(name, name, name, hunger,
-                        addedHP, addedSP, exp, addedAtk, addedDef, addedRec);
+                        addedHP, addedSP, exp, addedAtk, addedDef, addedRec, id);
             }
         } catch (JSONException e) {
             e.printStackTrace();

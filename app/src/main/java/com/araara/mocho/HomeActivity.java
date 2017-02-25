@@ -33,7 +33,10 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvWelcome;
     private Button btnSignOut;
     private Button btnMap;
+    private Button btnMonster;
     private SensorManager sensorManager;
+
+    private FirebaseUser user;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,19 +72,13 @@ public class HomeActivity extends AppCompatActivity {
         tvWelcome = (TextView) findViewById(R.id.tvWelcome);
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
         btnMap = (Button) findViewById(R.id.btnMap);
+        btnMonster = (Button) findViewById(R.id.btnMonster);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             tvWelcome.append(user.getDisplayName());
             Toast.makeText(this, "Welcome, " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
-
-        progressDialog = new ProgressDialog(HomeActivity.this);
-        progressDialog.setMessage("Please wait, retrieving your monsters...");
-        progressDialog.show();
-
-        RetrieveMonsterData retrieveMonsterData = new RetrieveMonsterData();
-        retrieveMonsterData.execute("http://ranggarmaste.cleverapps.io/api/users/" + user.getDisplayName() + "/monsters");
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +94,18 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, LocationServiceActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnMonster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                progressDialog = new ProgressDialog(HomeActivity.this);
+                progressDialog.setMessage("Please wait, retrieving your monsters...");
+                progressDialog.show();
+
+                RetrieveMonsterData retrieveMonsterData = new RetrieveMonsterData();
+                retrieveMonsterData.execute("http://ranggarmaste.cleverapps.io/api/users/" + user.getDisplayName() + "/monsters");
             }
         });
 
@@ -158,15 +167,12 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
-                Log.d(TAG, s);
                 JSONObject res = new JSONObject(s);
                 String ownedMonsters = res.getString("OwnedMonsters");
                 progressDialog.hide();
                 Intent intent = new Intent(HomeActivity.this, GameActivity.class);
                 intent.putExtra("MONSTER", ownedMonsters);
                 startActivity(intent);
-                Log.d(TAG, res.getString("email"));
-                Log.d(TAG, "onPostExecute: Successful retrieval");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -182,12 +188,10 @@ public class HomeActivity extends AppCompatActivity {
             String response = "";
             try {
                 URL url = new URL(params[0]);
-                Log.d(TAG, "tes");
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.connect();
-                Log.d(TAG, params[0]);
 
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -197,7 +201,6 @@ public class HomeActivity extends AppCompatActivity {
                         response += line;
                     }
                 }
-                Log.d(TAG, "doInBackground: response: " + response);
             } catch (IOException e) {
                 e.printStackTrace();
             }
