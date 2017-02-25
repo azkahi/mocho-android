@@ -70,15 +70,8 @@ public class MonsterAdapter extends BaseAdapter {
         }
 
         int j = i;
-        int idxInitMonster = 0;
+        int idxInitMonster = DataModel.getIdxMonster(monsterList[i].getName());
         int idxMonster = 0;
-            for (int k = 0; k < DataModel.monsters.length; k++){
-                if (monsterList[j].getName().equals(DataModel.monsters[k])){
-                    idxInitMonster = k;
-                    idxMonster = j;
-                    break;
-                }
-            }
 
         // Calculating current stats
         int HP = DataModel.initHP[idxInitMonster] + monsterList[idxMonster].getHP();

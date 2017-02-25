@@ -56,15 +56,16 @@ public class DataModel {
             JSONArray ArrayMonster = new JSONArray(Jarr);
             monsterList = new Monster[ArrayMonster.length()];
             for (int i = 0; i < ArrayMonster.length(); i++) {
+                int id = ArrayMonster.getJSONObject(i).getInt("id");
                 String name = ArrayMonster.getJSONObject(i).getString("name");
-                int addedAtk = ArrayMonster.getJSONObject(i).getInt("addedAtk");
-                int addedDef = ArrayMonster.getJSONObject(i).getInt("addedDef");
-                int addedRec = ArrayMonster.getJSONObject(i).getInt("addedRec");
-                int addedHP = ArrayMonster.getJSONObject(i).getInt("addedHP");
-                int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP");
+                int idxInit = getIdxMonster(name);
+                int addedAtk = ArrayMonster.getJSONObject(i).getInt("addedAtk") - initAtk[idxInit];
+                int addedDef = ArrayMonster.getJSONObject(i).getInt("addedDef") - initDef[idxInit];
+                int addedRec = ArrayMonster.getJSONObject(i).getInt("addedRec") - initRec[idxInit];
+                int addedHP = ArrayMonster.getJSONObject(i).getInt("addedHP") - initHP[idxInit];
+                int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP") - initSP[idxInit];
                 int exp = ArrayMonster.getJSONObject(i).getInt("exp");
                 int hunger = ArrayMonster.getJSONObject(i).getInt("hunger");
-                int id = ArrayMonster.getJSONObject(i).getInt("id");
                 monsterList[i] = new Monster(name, name, name, hunger,
                         addedHP, addedSP, exp, addedAtk, addedDef, addedRec, id);
             }
