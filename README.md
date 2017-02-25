@@ -22,6 +22,7 @@ Ini adalah repository untuk Game Mocho yang digunakan pada Android.  Pada _platf
 ## Kekurangan
 1. Tidak dapat melakukan _summon_ monster (masih harus memasukkan monster secara manual) karena _summon_ monster terdapat pada platform _arduino_
 2. Maps masih terus menerus melakukan zoom in ke tempat berada, sehingga User Experience menjadi sedikit terganggu
+
 ## Pembagian Tugas
 1. 13514068 : Membagi tugas, Sensor, Push Notification, API Server initialization, Firebase, Login dan Register, Laporan
 2. 13514086 : Tampilan Monster, Feed, Desain Game Monster, Attack, Defense, Laporan
