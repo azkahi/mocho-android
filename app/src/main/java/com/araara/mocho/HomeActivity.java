@@ -66,11 +66,9 @@ public class HomeActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-
             tvWelcome.append(user.getDisplayName());
             Toast.makeText(this, "Welcome, " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
         }
-
 
         progressDialog = new ProgressDialog(HomeActivity.this);
         progressDialog.setMessage("Please wait, retrieving your monsters...");
@@ -82,10 +80,9 @@ public class HomeActivity extends AppCompatActivity {
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                SignOutTask signOutTask = new SignOutTask();
+                signOutTask.execute(user.getDisplayName());
             }
         });
 
@@ -96,8 +93,56 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private class RetrieveMonsterData extends AsyncTask<String, Void, String> {
+    private class SignOutTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage("Signing out...");
+            progressDialog.show();
+        }
 
+        @Override
+        protected String doInBackground(String... strings) {
+            String username = strings[0];
+            if (deleteToken(username)) {
+                return "OK";
+            } else {
+                return "ERROR";
+            }
+        }
+
+        private boolean deleteToken(String username) {
+            try {
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/user_keys/" + username);
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("DELETE");
+                conn.connect();
+
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    return true;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.hide();
+            if (s.equals("OK")) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    }
+
+    private class RetrieveMonsterData extends AsyncTask<String, Void, String> {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

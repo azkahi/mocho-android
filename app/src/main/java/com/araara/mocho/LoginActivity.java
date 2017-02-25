@@ -2,7 +2,9 @@ package com.araara.mocho;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
@@ -18,6 +20,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -94,26 +106,95 @@ public class LoginActivity extends AppCompatActivity {
         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressDialog.hide();
                 Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
 
                 if (!task.isSuccessful()) {
+                    progressDialog.hide();
                     Log.w(TAG, "signInWithEmail", task.getException());
                     Toast.makeText(LoginActivity.this, "Your email/password might be wrong.",
                             Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user != null && user.isEmailVerified()) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
+                        RegisterTokenTask registerTokenTask = new RegisterTokenTask();
+                        registerTokenTask.execute(user.getDisplayName());
                     } else {
+                        progressDialog.hide();
                         Toast.makeText(LoginActivity.this, "Please verify your email first.",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+    private class RegisterTokenTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog.setMessage("Signing in...");
+            progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String username = strings[0];
+            if (registerToken(username)) {
+                return "OK";
+            } else {
+                return "ERROR";
+            }
+        }
+
+        private boolean registerToken(String username) {
+            String response = "";
+            String token = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this).getString("token", null);
+            try {
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/user_keys/" + username);
+                Log.d(TAG, "sendRegistrationToServer: username=" + username);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream(), "UTF-8"));
+                writer.write("key=" + token);
+                writer.flush();
+                writer.close();
+
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    String line;
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = br.readLine()) != null) {
+                        response += line;
+                    }
+                }
+                Log.d(TAG, "doInBackground: response: " + response);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                JSONObject obj = new JSONObject(response);
+                if (!obj.getString("status").equals("OK")) {
+                    return false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            progressDialog.hide();
+
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
