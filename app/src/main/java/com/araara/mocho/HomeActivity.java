@@ -162,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                 String ownedMonsters = res.getString("OwnedMonsters");
                 progressDialog.hide();
                 Intent intent = new Intent(HomeActivity.this, GameActivity.class);
-                intent.putExtra(EXTRA_MESSAGE, ownedMonsters);
+                intent.putExtra("MONSTER", ownedMonsters);
                 startActivity(intent);
                 Log.d(TAG, res.getString("email"));
                 Log.d(TAG, "onPostExecute: Successful retrieval");
