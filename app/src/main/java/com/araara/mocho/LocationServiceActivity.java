@@ -85,11 +85,6 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                 mMap.setMyLocationEnabled(true);
             }
             else{
-                Integer bVersion = Build.VERSION.SDK_INT;
-                Integer bVersionCode = Build.VERSION_CODES.M;
-                Log.i(TAG, bVersion.toString());
-                Log.i(TAG, bVersionCode.toString());
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
@@ -99,6 +94,8 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+
         Log.i(TAG, "MASUK SAMPE SINI");
         LatLng kiriBawah = new LatLng(-6.893804, 107.608472);
         mMap.addMarker(new MarkerOptions().position(kiriBawah).title("Lapangan Sipil"));
@@ -130,7 +127,8 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         LatLng nasijepang = new LatLng(-6.892491, 107.612052);
         mMap.addMarker(new MarkerOptions().position(nasijepang).title("Nasi Jepang"));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(tengahBawah));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(tengahBawah));
+
     }
 
     @Override
@@ -169,13 +167,13 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Current Position");
+        markerOptions.title(latLng.toString());
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
         //stop location updates
         if (mGoogleApiClient != null) {
