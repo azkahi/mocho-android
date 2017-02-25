@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 public class DetailGameActivity extends AppCompatActivity implements DetailMenu.OnMenuClickedListener {
     public static final String TAG = "DetailGameActivtity";
+    int idx = -1;
     SharedPreferences sharedPreferences;
     Monster[] monstersList;
     AnimationDrawable frameAnimation;
@@ -33,6 +34,10 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         if (!parseMonsterString.equals("NONE")) monstersList = DataModel.parseMonster(parseMonsterString);
         Intent intent = getIntent();
         idx = intent.getIntExtra("idxmonster", -1);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 67dbe59ab1caaa57f946bc0b908b0f9ebcd787c6
         if (idx != -1) {
             int idxmonster = DataModel.getIdxMonster(monstersList[idx].getName());
             TextView monstername = (TextView) findViewById(R.id.monster_name);
@@ -97,6 +102,10 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             startActivity(intent);
         } else if (menu.equals("UNLOCK")) {
             Intent intent = new Intent(this, LocationServiceActivity.class);
+            intent.putExtra("idxmonster", idx);
+            startActivity(intent);
+        } else if(menu.equals("FEED")) {
+            Intent intent = new Intent(DetailGameActivity.this, FeedActivity.class);
             intent.putExtra("idxmonster", idx);
             startActivity(intent);
         }

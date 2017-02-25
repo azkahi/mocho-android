@@ -37,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text=""
             android:id="@+id/desc"
             android:layout_marginStart="10dp"
             android:paddingEnd="10dp"
