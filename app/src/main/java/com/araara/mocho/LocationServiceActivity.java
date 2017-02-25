@@ -33,9 +33,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class LocationServiceActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.ConnectionCallbacks, GoogleMap.OnMarkerClickListener,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
     public static final String TAG = LocationServiceActivity.class.getSimpleName();
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -59,7 +58,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setTitle("Enable GPS Settings");
-            builder.setMessage("Are you want to enable GPS for better tracking?");
+            builder.setMessage("Do you want to enable GPS for better tracking?");
 
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
@@ -113,7 +112,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         mMap = googleMap;
 
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
+        mMap.setOnMarkerClickListener(this);
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -133,37 +132,37 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
             mMap.setMyLocationEnabled(true);
         }
 
-
         Log.i(TAG, "MASUK SAMPE SINI");
-        LatLng kiriBawah = new LatLng(-6.893804, 107.608472);
-        mMap.addMarker(new MarkerOptions().position(kiriBawah).title("Lapangan Sipil"));
-
-        LatLng tengahBawah = new LatLng(-6.893218, 107.610443);
-        mMap.addMarker(new MarkerOptions().position(tengahBawah).title("Gerbang Depan"));
-
-        LatLng kananBawah = new LatLng(-6.893580, 107.611881);
-        mMap.addMarker(new MarkerOptions().position(kananBawah).title("Lapangan Seni Rupa"));
 
         LatLng labtekV = new LatLng(-6.890598, 107.609628);
         mMap.addMarker(new MarkerOptions().position(labtekV).title("Labtek V"));
 
-        LatLng boulevard = new LatLng(-6.891908, 107.610390);
-        mMap.addMarker(new MarkerOptions().position(boulevard).title("Boulevard"));
-
-        LatLng tengah = new LatLng(-6.889891, 107.610357);
-        mMap.addMarker(new MarkerOptions().position(tengah).title("Titik Pusat"));
-
-        LatLng perpus = new LatLng(-6.888203, 107.610693);
-        mMap.addMarker(new MarkerOptions().position(perpus).title("Perpustakaan Pusat"));
-
         LatLng bengkok = new LatLng(-6.889300, 107.611734);
         mMap.addMarker(new MarkerOptions().position(bengkok).title("Kantin Bengkok"));
 
-        LatLng barat = new LatLng(-6.890152, 107.608226);
-        mMap.addMarker(new MarkerOptions().position(barat).title("Titik Barat"));
+        LatLng tengahBawah = new LatLng(-6.893218, 107.610443);
+        mMap.addMarker(new MarkerOptions().position(tengahBawah).title("Gerbang Depan"));
 
-        LatLng nasijepang = new LatLng(-6.892491, 107.612052);
-        mMap.addMarker(new MarkerOptions().position(nasijepang).title("Nasi Jepang"));
+//        LatLng kananBawah = new LatLng(-6.893580, 107.611881);
+//        mMap.addMarker(new MarkerOptions().position(kananBawah).title("Lapangan Seni Rupa"));
+//
+//        LatLng kiriBawah = new LatLng(-6.893804, 107.608472);
+//        mMap.addMarker(new MarkerOptions().position(kiriBawah).title("Lapangan Sipil"));
+//
+//        LatLng boulevard = new LatLng(-6.891908, 107.610390);
+//        mMap.addMarker(new MarkerOptions().position(boulevard).title("Boulevard"));
+//
+//        LatLng tengah = new LatLng(-6.889891, 107.610357);
+//        mMap.addMarker(new MarkerOptions().position(tengah).title("Titik Pusat"));
+//
+//        LatLng perpus = new LatLng(-6.888203, 107.610693);
+//        mMap.addMarker(new MarkerOptions().position(perpus).title("Perpustakaan Pusat"));
+//
+//        LatLng barat = new LatLng(-6.890152, 107.608226);
+//        mMap.addMarker(new MarkerOptions().position(barat).title("Titik Barat"));
+//
+//        LatLng nasijepang = new LatLng(-6.892491, 107.612052);
+//        mMap.addMarker(new MarkerOptions().position(nasijepang).title("Nasi Jepang"));
 
         Log.i(TAG, "onMapReady done!");
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(tengahBawah));
@@ -282,7 +281,6 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                     }
 
                 } else {
-
                     // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
@@ -291,5 +289,28 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
             // other 'case' lines to check for other permissions this app might request.
             //You can add here other case statements according to your requirement.
         }
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        if (marker != mCurrLocationMarker) {
+            Log.d(TAG, "onMarkerClick: " + countDistance(mCurrLocationMarker, marker));
+            if (countDistance(mCurrLocationMarker, marker) > 10000) { // 10km
+                Toast.makeText(this, "This location is too far.", Toast.LENGTH_LONG).show();
+                return false;
+            } else {
+                Intent intent = new Intent(this, SubtypeActivity.class);
+                intent.putExtra("loc", marker.getTitle());
+                startActivity(intent);
+            }
+        }
+        return true;
+    }
+
+    private float countDistance(Marker m1, Marker m2) {
+        float[] results = new float[1];
+        Location.distanceBetween(m1.getPosition().latitude, m1.getPosition().longitude,
+                m2.getPosition().latitude, m2.getPosition().longitude, results);
+        return results[0];
     }
 }

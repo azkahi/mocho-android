@@ -93,4 +93,6 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_game">GameActivity</string>
+    <string name="gyro_info_dialog">Shake your phone as fast as you can in 5 seconds. The crazier you shake, the stronger you will be!</string>
+    <string name="acc_info_dialog">Try to position your phone in (x,y,z) dimension until the number shown is close to 0. The smaller the number is, the harder your body will be!</string>
 </resources>

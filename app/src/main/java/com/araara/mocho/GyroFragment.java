@@ -26,6 +26,7 @@ public class GyroFragment extends Fragment implements SensorEventListener {
     private TextView tvATKSensor;
     private TextView tvTime;
     private Button btnStartGyro;
+    private Button btnInfoGyro;
     private double accValue;
 
     @Override
@@ -43,6 +44,7 @@ public class GyroFragment extends Fragment implements SensorEventListener {
         tvATKSensor = (TextView) view.findViewById(R.id.tvATKSensor);
         tvTime = (TextView) view.findViewById(R.id.tvTime);
         btnStartGyro = (Button) view.findViewById(R.id.btnStartGyro);
+        btnInfoGyro = (Button) view.findViewById(R.id.btnInfoGyro);
 
         btnStartGyro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,9 +56,17 @@ public class GyroFragment extends Fragment implements SensorEventListener {
                     }
 
                     public void onFinish() {
+                        tvTime.setText("0 s");
                         mSensorManager.unregisterListener(GyroFragment.this);
                     }
                 }.start();
+            }
+        });
+        btnInfoGyro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GyroDialogFragment gyroDialogFragment = new GyroDialogFragment();
+                gyroDialogFragment.show(getFragmentManager(), "gyro_info");
             }
         });
         return view;

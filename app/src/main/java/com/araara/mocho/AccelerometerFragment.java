@@ -1,5 +1,6 @@
 package com.araara.mocho;
 
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -8,7 +9,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +29,7 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
     private TextView tvTime;
     private TextView tvTime2;
     private Button btnStartAcc;
+    private Button btnInfoAcc;
 
     private double[] target;
     private double accValue;
@@ -55,6 +56,7 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
         tvTime = (TextView) view.findViewById(R.id.tvTime);
         tvTime2 = (TextView) view.findViewById(R.id.tvTime2);
         btnStartAcc = (Button) view.findViewById(R.id.btnStartAcc);
+        btnInfoAcc = (Button) view.findViewById(R.id.btnInfoAcc);
 
         btnStartAcc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +69,19 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
                     }
 
                     public void onFinish() {
+                        tvTime.setText("0 s");
+                        tvTime2.setText("0 s");
                         mSensorManager.unregisterListener(AccelerometerFragment.this);
                     }
                 }.start();
+            }
+        });
+
+        btnInfoAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccDialogFragment accDialogFragment = new AccDialogFragment();
+                accDialogFragment.show(getFragmentManager(), "acc_info");
             }
         });
         return view;
