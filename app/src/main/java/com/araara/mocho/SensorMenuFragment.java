@@ -33,8 +33,8 @@ public class SensorMenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sensor_menu, container, false);
-        atkButton = (ImageButton) view.findViewById(R.id.btnAtk);
-        defButton = (ImageButton) view.findViewById(R.id.btnDef);
+        atkButton = (ImageButton) view.findViewById(R.id.btnMeat);
+        defButton = (ImageButton) view.findViewById(R.id.btnRice);
 
         atkButton.setOnClickListener(new View.OnClickListener() {
             @Override
