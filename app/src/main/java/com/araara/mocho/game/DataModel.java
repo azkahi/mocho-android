@@ -1,8 +1,5 @@
 package com.araara.mocho.game;
 
-import android.util.Log;
-
-import com.araara.mocho.HomeActivity;
 import com.araara.mocho.R;
 
 import org.json.JSONArray;
@@ -77,8 +74,8 @@ public class DataModel {
         return monsterList;
     }
 
-    public static int getIdxMonster (String monstername){
-        if (monstername.equals("Puta")){
+    public static int getIdxMonster (String monstername) {
+        if (monstername.equals("Puta")) {
             return 0;
         } else if (monstername.equals("Ina")) {
             return 1;

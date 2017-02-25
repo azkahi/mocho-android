@@ -1,7 +1,6 @@
 package com.araara.mocho;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +13,7 @@ import android.widget.ImageButton;
 public class DetailMenu extends Fragment {
     private ImageButton trainButton;
     private ImageButton feedButton;
+    private ImageButton unlockButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -35,6 +35,7 @@ public class DetailMenu extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail_menu, container, false);
         trainButton = (ImageButton) view.findViewById(R.id.btnTrain);
         feedButton = (ImageButton) view.findViewById(R.id.btnFeed);
+        unlockButton = (ImageButton) view.findViewById(R.id.btnUnlock);
 
         trainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +49,12 @@ public class DetailMenu extends Fragment {
                 mListener.onMenuClicked("FEED");
             }
         });
-
+        unlockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onMenuClicked("UNLOCK");
+            }
+        });
         return view;
     }
 

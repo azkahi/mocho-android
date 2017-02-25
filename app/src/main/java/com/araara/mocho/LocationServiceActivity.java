@@ -42,11 +42,13 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     private Marker mCurrLocationMarker;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     LocationRequest mLocationRequest;
+    private int idx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_service);
+        idx = getIntent().getIntExtra("idxmonster", 0);
         // Create an instance of GoogleAPIClient.
 
         // call location settings intent
@@ -299,7 +301,11 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                 return false;
             } else {
                 Intent intent = new Intent(this, SubtypeActivity.class);
-                intent.putExtra("loc", marker.getTitle());
+                Bundle bundle = new Bundle();
+                bundle.putString("loc", marker.getTitle());
+                bundle.putInt("idxmonster", idx);
+
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
         }
