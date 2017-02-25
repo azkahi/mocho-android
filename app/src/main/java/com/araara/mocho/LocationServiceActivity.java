@@ -127,6 +127,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         LatLng nasijepang = new LatLng(-6.892491, 107.612052);
         mMap.addMarker(new MarkerOptions().position(nasijepang).title("Nasi Jepang"));
 
+        Log.i(TAG, "onMapReady done!");
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(tengahBawah));
 
     }
@@ -134,8 +135,8 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
+        mLocationRequest.setInterval(10000);
+        mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -176,9 +177,10 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
         //stop location updates
+        /*
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+        }*/
     }
 
     protected synchronized void buildGoogleApiClient() {
