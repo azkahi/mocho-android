@@ -9,15 +9,14 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -48,24 +47,26 @@
 
         <activity
             android:name=".LocationServiceActivity"
-            android:label="@string/title_activity_location_service"></activity>
-        <activity android:name=".SensorActivity"></activity>
+            android:label="@string/title_activity_location_service" />
+        <activity android:name=".SensorActivity" />
         <activity
             android:name=".GameActivity"
             android:label="@string/title_activity_game"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DetailGameActivity"></activity>
-        <service
-            android:name=".MyFirebaseInstanceIdService">
+        <activity android:name=".DetailGameActivity" />
+
+        <service android:name=".MyFirebaseInstanceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service
-            android:name=".MyFirebaseMessagingService">
+        <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".SubtypeActivity"></activity>
     </application>
+
 </manifest>
