@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.transition.ChangeBounds;
@@ -18,7 +20,8 @@ import com.araara.mocho.game.DataModel;
 import com.araara.mocho.game.Monster;
 import com.squareup.picasso.Picasso;
 
-public class DetailGameActivity extends AppCompatActivity {
+public class DetailGameActivity extends AppCompatActivity implements DetailMenu.OnMenuClickedListener {
+    public static final String TAG = "DetailGameActivtity";
     SharedPreferences sharedPreferences;
     Monster[] monstersList;
     AnimationDrawable frameAnimation;
@@ -65,9 +68,25 @@ public class DetailGameActivity extends AppCompatActivity {
             // Start the animation (looped playback by default).
             frameAnimation.start();
         }
+
+        if (findViewById(R.id.fragment_container) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            DetailMenu menuFragment = new DetailMenu();
+            menuFragment.setArguments(getIntent().getExtras());
+            Log.d(TAG, "Loaded fragment");
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, menuFragment).commit();
+
+            Log.d(TAG, "FragmentLoading");
+        }
+
     }
 
-    @Override
+    /* @Override
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
@@ -76,6 +95,22 @@ public class DetailGameActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(0, 0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    }
+    } */
 
+    @Override
+    public void onMenuClicked(String menu) {
+        Fragment fragment;
+        if (menu.equals("TRAIN")) {
+            fragment = new SensorMenuFragment();
+        } else if(menu.equals("FEED")) {
+            fragment = new AccelerometerFragment();
+        } else {
+            // Insert fragment map here
+            fragment = new GyroFragment();
+        }
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }

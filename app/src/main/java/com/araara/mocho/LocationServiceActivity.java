@@ -59,7 +59,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
             builder.setTitle("Enable GPS Settings");
-            builder.setMessage("Are you want to enable GPS for better tracking?");
+            builder.setMessage("Do you want to enable GPS for better tracking?");
 
             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
