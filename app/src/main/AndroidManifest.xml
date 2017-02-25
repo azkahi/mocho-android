@@ -3,6 +3,7 @@
     package="com.araara.mocho">
 
     <application
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -22,6 +23,10 @@
             android:theme="@style/SignInTheme" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SensorActivity"></activity>
+        <activity
+            android:name=".GameActivity"
+            android:label="@string/title_activity_game"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".DetailGameActivity"></activity>
     </application>
-
 </manifest>
