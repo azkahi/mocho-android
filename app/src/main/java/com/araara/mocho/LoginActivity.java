@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     if (user.isEmailVerified()) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, LocationServiceActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     FirebaseUser user = mAuth.getCurrentUser();
                     if (user != null && user.isEmailVerified()) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, LocationServiceActivity.class);
                         startActivity(intent);
                         finish();
                     } else {

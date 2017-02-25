@@ -1,5 +1,7 @@
 package com.araara.mocho;
 
+import android.*;
+import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -9,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -29,6 +32,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
+    public static final String TAG = LocationServiceActivity.class.getSimpleName();
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
@@ -45,8 +49,8 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
 
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks) this)
-                    .addOnConnectionFailedListener((GoogleApiClient.OnConnectionFailedListener) this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
         }
@@ -80,11 +84,22 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
             }
+            else{
+                Integer bVersion = Build.VERSION.SDK_INT;
+                Integer bVersionCode = Build.VERSION_CODES.M;
+                Log.i(TAG, bVersion.toString());
+                Log.i(TAG, bVersionCode.toString());
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION);
+            }
         }
         else {
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+        Log.i(TAG, "MASUK SAMPE SINI");
         LatLng kiriBawah = new LatLng(-6.893804, 107.608472);
         mMap.addMarker(new MarkerOptions().position(kiriBawah).title("Lapangan Sipil"));
 
@@ -144,12 +159,14 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation = location;
+        Log.i(TAG, "onLocationChanged " + mLastLocation.toString());
+
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
         }
 
         //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
@@ -167,6 +184,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     }
 
     protected synchronized void buildGoogleApiClient() {
+        //Log.d(TAG, "build Google Api Client " + mLastLocation.toString());
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -207,8 +225,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],@NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -220,7 +237,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                             android.Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
-                        if (mGoogleApiClient == null) {
+                        if (mGoogleApiClient != null) {
                             buildGoogleApiClient();
                         }
                         mMap.setMyLocationEnabled(true);
@@ -231,7 +248,6 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                     // Permission denied, Disable the functionality that depends on this permission.
                     Toast.makeText(this, "permission denied", Toast.LENGTH_LONG).show();
                 }
-                return;
             }
 
             // other 'case' lines to check for other permissions this app might request.
