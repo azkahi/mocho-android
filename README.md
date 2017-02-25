@@ -2,12 +2,14 @@
 
 Ini adalah repository untuk Game Mocho yang digunakan pada Android.  Pada _platform_ ini, pemain dapat melakukan _training_ dan _upgrade_ suatu monster sehingga monster yang dibuat bisa menjadi lebih kuat dan dapat bertarung dengan monster lainnya.
 ## Fitur yang sudah dibuat
+
 * Fitur Login dan Register suatu pemain. Apabila pemain melakukan register, maka pertamanya akan melakukan verifikasi terlebih dahulu ke e-mail yang didaftarkan baru pemain dapat memainkannya.
 * Fitur tambah attack atau defense suatu monster (setiap monster memiliki penambahan yang berbeda-beda)
+* Tampilan monster dan detailnya
 
 ## Service yang dipakai
 * GPS (Location Service)
-* Firebase Database, Authentication and Crash Reporting
+* Firebase Database, Authentication, Push Notification and Crash Reporting
 * JSON API Server (cleverapps.io)
 
 ## Cara memainkannya
@@ -21,6 +23,6 @@ Ini adalah repository untuk Game Mocho yang digunakan pada Android.  Pada _platf
 1. Tidak dapat melakukan _summon_ monster (masih harus memasukkan monster secara manual) karena _summon_ monster terdapat pada platform _arduino_
 2. Maps masih terus menerus melakukan zoom in ke tempat berada, sehingga User Experience menjadi sedikit terganggu
 ## Pembagian Tugas
-13514068 : Membagi tugas, notification, API Server initialization, Firebase, Login & Register
-13514086 : Desain Game Monster, Attack, Defense
-13514088 : Location Service (GPS) in Real Time, Marker lokasi, Laporan dan README
+1. 13514068 : Membagi tugas, Sensor, Push Notification, API Server initialization, Firebase, Login dan Register, Laporan
+2. 13514086 : Tampilan Monster, Feed, Desain Game Monster, Attack, Defense, Laporan
+3. 13514088 : Location Service (GPS), Marker lokasi, Laporan dan README

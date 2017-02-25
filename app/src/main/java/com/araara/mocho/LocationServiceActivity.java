@@ -313,4 +313,15 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
                 m2.getPosition().latitude, m2.getPosition().longitude, results);
         return results[0];
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(
+                mGoogleApiClient, this);
+    }
 }
