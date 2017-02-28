@@ -1,6 +1,7 @@
 package com.araara.mocho.game;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class MonsterAdapter extends BaseAdapter {
         holder._monsterdesc.setText(desc);
         holder._hunger.setMax(500);
         holder._hunger.setProgress(monsterList[idxMonster].getHunger());
+        Log.d("HUNGER:", "" + monsterList[idxMonster].getHunger());
         holder._exp.setMax(100);
         holder._exp.setProgress(monsterList[idxMonster].getExp() % 100);
         //holder._cover.setImageResource(DataModel.cover[idxInitMonster]);

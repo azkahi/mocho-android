@@ -48,6 +48,8 @@ public class FeedActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        progressDialog.setMessage("Please wait, updating data...");
+        progressDialog.show();
         updateHunger.execute("TES");
         String res = sharedPreferences.getString("OwnedMonster", "NONE");
         Log.d("BEFORE:", res);
@@ -224,6 +226,8 @@ public class FeedActivity extends AppCompatActivity {
                 Log.d("RANGGARMASTE", "hunger=" + tempMonster[idx].getHunger());
                 writer.flush();
                 writer.close();
+
+                conn.connect();
 
                 int responseCode = conn.getResponseCode();
                 if (responseCode == HttpURLConnection.HTTP_OK) {
