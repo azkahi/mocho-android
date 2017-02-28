@@ -36,7 +36,7 @@ public class FeedActivity extends AppCompatActivity {
 
     final UpdateHunger updateHunger = new UpdateHunger();
     int meat, rice;
-    int idx, idxserver;
+    int idx;
     ImageButton meatButton;
     ImageButton riceButton;
     TextView meatQty;
@@ -47,7 +47,14 @@ public class FeedActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         updateHunger.execute("TES");
-
+        String res = sharedPreferences.getString("OwnedMonster", "NONE");
+        Log.d("BEFORE:", res);
+        String temp = DataModel.updateJSONdata(res, tempMonster[idx], idx);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("OwnedMonster", temp);
+        editor.apply();
+        res = sharedPreferences.getString("OwnedMonster", "NONE");
+        Log.d("AFTER:", res);
     }
 
     @Override
@@ -86,6 +93,7 @@ public class FeedActivity extends AppCompatActivity {
                 } else {
                     if (tempMonster.length >= 0) {
                         tempMonster[idx].setHunger(tempMonster[idx].getHunger() + 100);
+                        Log.d("MEAT:", tempMonster[idx].getName() + ": " + tempMonster[idx].getHunger());
                     }
                     meatQty.setText("" + meat);
                 }
@@ -105,6 +113,8 @@ public class FeedActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     private class RetrieveFoodData extends AsyncTask<String, Void, String> {

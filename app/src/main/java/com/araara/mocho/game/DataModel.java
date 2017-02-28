@@ -4,6 +4,9 @@ import com.araara.mocho.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
 
 /**
  * Created by Azka Hanif Imtiyaz on 2/24/2017.
@@ -83,5 +86,20 @@ public class DataModel {
         } else {
             return -1;
         }
+    }
+
+    public static String updateJSONdata (String Jarr, Monster mon, int id){
+        String res = "";
+        try {
+            JSONArray ArrayMonster = new JSONArray(Jarr);
+            JSONObject mJSON = ArrayMonster.getJSONObject(id);
+            mJSON.put("hunger", mon.getHunger());
+            mJSON.put("addedAtk", mon.getAttack());
+            mJSON.put("addedDef", mon.getDefense());
+            res = ArrayMonster.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }
