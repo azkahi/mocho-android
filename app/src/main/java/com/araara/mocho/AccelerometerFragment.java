@@ -205,7 +205,7 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return newDef;
+            return defVal;
         }
 
         private int calculate(Double rawVal) {

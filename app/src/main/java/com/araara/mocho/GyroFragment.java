@@ -197,7 +197,7 @@ public class GyroFragment extends Fragment implements SensorEventListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return newAtk;
+            return atkVal;
         }
 
         private int calculate(Double rawVal) {

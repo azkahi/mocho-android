@@ -62,14 +62,15 @@ public class DataModel {
                 int id = ArrayMonster.getJSONObject(i).getInt("id");
                 String name = ArrayMonster.getJSONObject(i).getString("name");
                 int idxInit = getIdxMonster(name);
-                int addedAtk = ArrayMonster.getJSONObject(i).getInt("addedAtk") - initAtk[idxInit];
-                int addedDef = ArrayMonster.getJSONObject(i).getInt("addedDef") - initDef[idxInit];
-                int addedRec = ArrayMonster.getJSONObject(i).getInt("addedRec") - initRec[idxInit];
-                int addedHP = ArrayMonster.getJSONObject(i).getInt("addedHP") - initHP[idxInit];
-                int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP") - initSP[idxInit];
+                int addedAtk = ArrayMonster.getJSONObject(i).getInt("addedAtk");
+                int addedDef = ArrayMonster.getJSONObject(i).getInt("addedDef");
+                int addedRec = ArrayMonster.getJSONObject(i).getInt("addedRec");
+                int addedHP = ArrayMonster.getJSONObject(i).getInt("addedHP");
+                int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP");
                 int exp = ArrayMonster.getJSONObject(i).getInt("exp");
                 int hunger = ArrayMonster.getJSONObject(i).getInt("hunger");
-                monsterList[i] = new Monster(name, name, name, hunger,
+                int subtype = ArrayMonster.getJSONObject(i).getInt("subtype");
+                monsterList[i] = new Monster(name, name, subtype, hunger,
                         addedHP, addedSP, exp, addedAtk, addedDef, addedRec, id);
             }
         } catch (JSONException e) {

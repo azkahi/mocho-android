@@ -1,10 +1,12 @@
 package com.araara.mocho;
 
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -92,8 +94,17 @@ public class FeedActivity extends AppCompatActivity {
                     meat = 0;
                 } else {
                     if (tempMonster.length >= 0) {
+                        SuccessDialogFragment successDialogFragment = new SuccessDialogFragment();
+                        Bundle bundle = new Bundle();
+                        if ((tempMonster[idx].getHunger() + 100) > 500){
+                            bundle.putString("fail", "failed");
+                        }
                         tempMonster[idx].setHunger(tempMonster[idx].getHunger() + 100);
                         Log.d("MEAT:", tempMonster[idx].getName() + ": " + tempMonster[idx].getHunger());
+                        bundle.putString("message", "Monster's Hunger +" + 100 + "!");
+                        bundle.putString("state", "current");
+                        successDialogFragment.setArguments(bundle);
+                        successDialogFragment.show(getSupportFragmentManager(), "message");
                     }
                     meatQty.setText("" + meat);
                 }
@@ -107,7 +118,16 @@ public class FeedActivity extends AppCompatActivity {
                     rice = 0;
                 } else {
                     if (tempMonster.length >= 0) {
+                        SuccessDialogFragment successDialogFragment = new SuccessDialogFragment();
+                        Bundle bundle = new Bundle();
+                        if ((tempMonster[idx].getHunger() + 50) > 500){
+                            bundle.putString("fail", "failed");
+                        }
                         tempMonster[idx].setHunger(tempMonster[idx].getHunger() + 50);
+                        bundle.putString("message", "Monster's Hunger +" + 50 + "!");
+                        bundle.putString("state", "current");
+                        successDialogFragment.setArguments(bundle);
+                        successDialogFragment.show(getSupportFragmentManager(), "message");
                     }
                     riceQty.setText("" + rice);
                 }

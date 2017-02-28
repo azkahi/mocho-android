@@ -31,7 +31,6 @@
         <activity
             android:name=".SignUpActivity"
             android:theme="@style/SignInTheme" />
-        <activity android:name=".HomeActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -46,12 +45,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".LocationServiceActivity"
-            android:label="@string/title_activity_location_service" />
+            android:name=".LocationServiceActivity" />
         <activity android:name=".SensorActivity" />
         <activity
             android:name=".GameActivity"
-            android:label="@string/title_activity_game"
             android:theme="@style/AppTheme" />
         <activity android:name=".DetailGameActivity" />
 

@@ -30,7 +30,8 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         sharedPreferences = getSharedPreferences("MONSTERS", Context.MODE_PRIVATE);
         Log.d("DetailGame", sharedPreferences.getAll().toString());
         parseMonsterString = sharedPreferences.getString("OwnedMonster", "NONE");
-        if (!parseMonsterString.equals("NONE")) monstersList = DataModel.parseMonster(parseMonsterString);
+        if (!parseMonsterString.equals("NONE"))
+            monstersList = DataModel.parseMonster(parseMonsterString);
         Intent intent = getIntent();
         idx = intent.getIntExtra("idxmonster", -1);
 
@@ -59,7 +60,9 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
                 return;
             }
             DetailMenu menuFragment = new DetailMenu();
-            menuFragment.setArguments(getIntent().getExtras());
+            Bundle bundle = new Bundle();
+            bundle.putInt("subtype", monstersList[idx].getSubtype());
+            menuFragment.setArguments(bundle);
             Log.d(TAG, "Loaded fragment");
 
             getSupportFragmentManager().beginTransaction()
@@ -70,7 +73,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
 
     }
 
-    /* @Override
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();
@@ -79,7 +82,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         startActivity(intent);
         overridePendingTransition(0, 0);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-    } */
+    }
 
     @Override
     public void onMenuClicked(String menu) {
@@ -100,7 +103,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             Intent intent = new Intent(this, LocationServiceActivity.class);
             intent.putExtra("idxmonster", idx);
             startActivity(intent);
-        } else if(menu.equals("FEED")) {
+        } else if (menu.equals("FEED")) {
             Intent intent = new Intent(DetailGameActivity.this, FeedActivity.class);
             intent.putExtra("idxmonster", idx);
             startActivity(intent);

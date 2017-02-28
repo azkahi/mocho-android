@@ -16,17 +16,35 @@ public class SuccessDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         String message = bundle.getString("message");
+        final String state = bundle.getString("state");
+        final String fail = bundle.getString("fail");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Success")
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
-                        startActivity(intent);
-                    }
-                });
-        // Create the AlertDialog object and return it
+        if (fail == null) {
+            builder.setTitle("Success")
+                    .setMessage(message)
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (state == null) {
+                                Intent intent = new Intent(getActivity(), GameActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+            // Create the AlertDialog object and return it
+        } else {
+            builder.setTitle("Failed")
+                    .setMessage("Oops, your monster is so full, it puked its entire food it ate. Your monster's hunger is now 0!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            if (state == null) {
+                                Intent intent = new Intent(getActivity(), GameActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+            // Create the AlertDialog object and return it
+        }
         return builder.create();
     }
 }
