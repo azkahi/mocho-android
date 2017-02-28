@@ -1,6 +1,7 @@
 package com.araara.mocho;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 public class DetailMenu extends Fragment {
     private ImageButton trainButton;
     private ImageButton feedButton;
     private ImageButton unlockButton;
+    private int subtype;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -36,6 +39,10 @@ public class DetailMenu extends Fragment {
         trainButton = (ImageButton) view.findViewById(R.id.btnTrain);
         feedButton = (ImageButton) view.findViewById(R.id.btnFeed);
         unlockButton = (ImageButton) view.findViewById(R.id.btnUnlock);
+        subtype = getArguments().getInt("subtype");
+        if (subtype == 1) {
+            unlockButton.setBackgroundColor(Color.RED);
+        }
 
         trainButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +59,11 @@ public class DetailMenu extends Fragment {
         unlockButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onMenuClicked("UNLOCK");
+                if (subtype == 1) {
+                    Toast.makeText(getActivity(), "You have already unlocked this monster's subtype", Toast.LENGTH_SHORT).show();
+                } else {
+                    mListener.onMenuClicked("UNLOCK");
+                }
             }
         });
         return view;

@@ -22,7 +22,7 @@ public class SuccessDialogFragment extends DialogFragment {
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(getActivity(), HomeActivity.class);
+                        Intent intent = new Intent(getActivity(), GameActivity.class);
                         startActivity(intent);
                     }
                 });

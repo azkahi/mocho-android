@@ -2,8 +2,8 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Your Monsters"
-        android:id="@+id/itemMonsters" />
-    <item android:title="Lottery"
-        android:id="@+id/itemLottery" />
+    <item android:title="Refresh Monsters"
+        android:id="@+id/refreshMonsters" />
+    <item android:title="Sign Out"
+        android:id="@+id/signOut" />
 </menu>

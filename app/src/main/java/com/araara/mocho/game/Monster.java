@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Monster implements Serializable {
     private String name;
     private String type;
-    private String subtype;
+    private int subtype;
     private int hunger;
     private int HP;
     private int SP;
@@ -23,7 +23,7 @@ public class Monster implements Serializable {
         return id;
     }
 
-    public Monster(String name, String type, String subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery, int id) {
+    public Monster(String name, String type, int subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery, int id) {
         this.name = name;
         this.type = type;
         this.subtype = subtype;
@@ -53,11 +53,11 @@ public class Monster implements Serializable {
         this.type = type;
     }
 
-    public String getSubtype() {
+    public int getSubtype() {
         return subtype;
     }
 
-    public void setSubtype(String subtype) {
+    public void setSubtype(int subtype) {
         this.subtype = subtype;
     }
 

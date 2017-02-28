@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     if (user.isEmailVerified()) {
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, GameActivity.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -191,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(s);
             progressDialog.hide();
 
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            Intent intent = new Intent(LoginActivity.this, GameActivity.class);
             startActivity(intent);
             finish();
         }

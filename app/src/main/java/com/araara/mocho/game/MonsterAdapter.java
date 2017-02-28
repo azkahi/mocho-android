@@ -1,11 +1,9 @@
 package com.araara.mocho.game;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -69,9 +67,8 @@ public class MonsterAdapter extends BaseAdapter {
             holder = (ViewHolder) convertview.getTag();
         }
 
-        int j = i;
         int idxInitMonster = DataModel.getIdxMonster(monsterList[i].getName());
-        int idxMonster = 0;
+        int idxMonster = i;
 
         // Calculating current stats
         int HP = DataModel.initHP[idxInitMonster] + monsterList[idxMonster].getHP();
