@@ -46,7 +46,8 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
-        android:background="@android:color/holo_green_dark" />
+        android:background="?attr/colorPrimaryDark"
+        android:textColor="#fff" />
 
     <Button
         android:text="Info"
@@ -59,5 +60,6 @@
         app:layout_constraintRight_toRightOf="@+id/btnStartGyro"
         app:layout_constraintHorizontal_bias="0.0"
         android:fontFamily="sans-serif-medium"
-        android:background="@android:color/holo_green_dark" />
+        android:background="?attr/colorPrimaryDark"
+        android:textColor="#ffffff" />
 </android.support.constraint.ConstraintLayout>

@@ -28,6 +28,7 @@ public class SuccessDialogFragment extends DialogFragment {
                             if (state == null) {
                                 Intent intent = new Intent(getActivity(), GameActivity.class);
                                 startActivity(intent);
+                                getActivity().finish();
                             }
                         }
                     });
@@ -40,6 +41,7 @@ public class SuccessDialogFragment extends DialogFragment {
                             if (state == null) {
                                 Intent intent = new Intent(getActivity(), GameActivity.class);
                                 startActivity(intent);
+                                getActivity().finish();
                             }
                         }
                     });

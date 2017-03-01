@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +58,8 @@ public class GameActivity extends AppCompatActivity {
                 RetrieveMonsterData retrieveMonsterData = new RetrieveMonsterData();
                 retrieveMonsterData.execute("http://ranggarmaste.cleverapps.io/api/users/" + user.getDisplayName() + "/monsters");
                 break;
+            case R.id.itemGPS:
+                startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
         }
         return true;
     }

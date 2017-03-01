@@ -6,8 +6,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-
 /**
  * Created by Azka Hanif Imtiyaz on 2/24/2017.
  */

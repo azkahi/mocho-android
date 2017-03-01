@@ -4,6 +4,8 @@
 
     <item android:title="Refresh Monsters"
         android:id="@+id/refreshMonsters" />
+    <item android:title="GPS Settings"
+        android:id="@+id/itemGPS" />
     <item android:title="Sign Out"
         android:id="@+id/signOut" />
 </menu>
