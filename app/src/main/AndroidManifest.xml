@@ -21,6 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/SignInTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +31,7 @@
         </activity>
         <activity
             android:name=".SignUpActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/SignInTheme" />
 
         <!--
@@ -45,12 +47,18 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".LocationServiceActivity" />
-        <activity android:name=".SensorActivity" />
+            android:name=".LocationServiceActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".SensorActivity"
+            android:configChanges="orientation|screenSize"/>
         <activity
             android:name=".GameActivity"
+            android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme" />
-        <activity android:name=".DetailGameActivity" />
+        <activity
+            android:name=".DetailGameActivity"
+            android:configChanges="orientation|screenSize"/>
 
         <service android:name=".MyFirebaseInstanceIdService">
             <intent-filter>
@@ -63,8 +71,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".SubtypeActivity" />
-        <activity android:name=".FeedActivity"></activity>
+        <activity
+            android:name=".SubtypeActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity
+            android:name=".FeedActivity"
+            android:configChanges="orientation|screenSize"></activity>
     </application>
 
 </manifest>
