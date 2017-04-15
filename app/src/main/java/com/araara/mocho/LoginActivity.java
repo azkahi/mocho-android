@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         setContentView(R.layout.activity_login);
 
         Intent intent = getIntent();
@@ -63,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -96,7 +100,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 String email = editEmail.getText().toString();
                 String password = editPassword.getText().toString();
-                signIn(email, password);
+                if(email.equals("")){
+                    Toast.makeText(LoginActivity.this, "Your email/password might be wrong.",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    signIn(email, password);
+                }
             }
         });
     }

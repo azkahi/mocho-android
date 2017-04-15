@@ -296,7 +296,7 @@ public class LocationServiceActivity extends FragmentActivity implements OnMapRe
     public boolean onMarkerClick(final Marker marker) {
         if (marker != mCurrLocationMarker) {
             Log.d(TAG, "onMarkerClick: " + countDistance(mCurrLocationMarker, marker));
-            if (countDistance(mCurrLocationMarker, marker) > 10000) { // 10km
+            if (countDistance(mCurrLocationMarker, marker) > 100) { // 100 m
                 Toast.makeText(this, "This location is too far.", Toast.LENGTH_LONG).show();
                 return false;
             } else {

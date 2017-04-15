@@ -19,9 +19,11 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:theme="@style/SignInTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +34,7 @@
         <activity
             android:name=".SignUpActivity"
             android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustPan|adjustResize"
             android:theme="@style/SignInTheme" />
 
         <!--
@@ -77,6 +80,7 @@
         <activity
             android:name=".FeedActivity"
             android:configChanges="orientation|screenSize"></activity>
+
     </application>
 
 </manifest>

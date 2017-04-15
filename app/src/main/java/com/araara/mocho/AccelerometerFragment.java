@@ -81,15 +81,15 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
             @Override
             public void onClick(View v) {
                 mSensorManager.registerListener(AccelerometerFragment.this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-                new CountDownTimer(15000, 1000) {
+                new CountDownTimer(15000, 100) {
                     public void onTick(long millisUntilFinished) {
-                        tvTime.setText(millisUntilFinished / 1000 + " s");
-                        tvTime2.setText(millisUntilFinished / 1000 + " s");
+                        tvTime.setText(millisUntilFinished / 1000 + "." + (millisUntilFinished/100) % 10 + " s");
+                        tvTime2.setText(millisUntilFinished / 1000 + "." + (millisUntilFinished/100) % 10 + " s");
                     }
 
                     public void onFinish() {
-                        tvTime.setText("0 s");
-                        tvTime2.setText("0 s");
+                        tvTime.setText("0.0 s");
+                        tvTime2.setText("0.0 s");
                         mSensorManager.unregisterListener(AccelerometerFragment.this);
                         progressDialog = new ProgressDialog(getActivity());
                         progressDialog.setMessage("Loading...");
