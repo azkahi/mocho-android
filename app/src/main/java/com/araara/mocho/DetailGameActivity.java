@@ -104,7 +104,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             intent.putExtra("idxmonster", idx);
             startActivity(intent);
         } else if (menu.equals("FEED")) {
-            Intent intent = new Intent(DetailGameActivity.this, FeedActivity.class);
+            Intent intent = new Intent(this, FeedActivity.class);
             intent.putExtra("idxmonster", idx);
             startActivity(intent);
         }

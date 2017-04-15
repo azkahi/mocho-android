@@ -67,6 +67,7 @@ public class DataModel {
                 int addedSP = ArrayMonster.getJSONObject(i).getInt("addedSP");
                 int exp = ArrayMonster.getJSONObject(i).getInt("exp");
                 int hunger = ArrayMonster.getJSONObject(i).getInt("hunger");
+                //int subtype = 0;
                 int subtype = ArrayMonster.getJSONObject(i).getInt("subtype");
                 monsterList[i] = new Monster(name, name, subtype, hunger,
                         addedHP, addedSP, exp, addedAtk, addedDef, addedRec, id);
