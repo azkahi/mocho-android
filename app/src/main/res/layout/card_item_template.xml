@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="HP: \tSP: \nAtk: Def: Rec: "
+                android:text="Level: \nHP: \tSP: \nAtk: Def: Rec: "
                 android:id="@+id/txt_monster_desc"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"

@@ -72,28 +72,32 @@ public class MonsterAdapter extends BaseAdapter {
         int idxMonster = i;
 
         // Calculating current stats
+        int level = monsterList[idxMonster].getExp() / 100;
         int HP = DataModel.initHP[idxInitMonster] + monsterList[idxMonster].getHP();
         int SP = DataModel.initSP[idxInitMonster] + monsterList[idxMonster].getSP();
         int Atk = DataModel.initAtk[idxInitMonster] + monsterList[idxMonster].getAttack();
         int Def = DataModel.initDef[idxInitMonster] + monsterList[idxMonster].getDefense();
         int Rec = DataModel.initRec[idxInitMonster] + monsterList[idxMonster].getRecovery();
-        String desc = "HP: " + HP + " SP: " + SP + "\nAtk: " + Atk + " Def: " + Def + " Rec: " + Rec;
+        String desc = "Level: " + level + "\nHP: " + HP + " SP: " + SP + "\nAtk: " + Atk + " Def: " + Def + " Rec: " + Rec;
 
         // Setup Holder
         holder._txt1.setText("Hunger");
         holder._txt2.setText("EXP");
+
         holder._monsterdetail.setText(DataModel.monsters[idxInitMonster]);
         holder._monsterdesc.setText(desc);
+
         holder._hunger.setMax(500);
         holder._hunger.setProgress(monsterList[idxMonster].getHunger());
+
         Log.d("HUNGER:", "" + monsterList[idxMonster].getHunger());
         holder._exp.setMax(100);
         holder._exp.setProgress(monsterList[idxMonster].getExp() % 100);
+
         //holder._cover.setImageResource(DataModel.cover[idxInitMonster]);
         Picasso.with(context).load(DataModel.cover[idxInitMonster]).into(holder._cover);
         //holder._background.setImageResource(DataModel.background[0]);
         Picasso.with(context).load(DataModel.background[0]).into(holder._background);
-
 
 
         return convertview;
