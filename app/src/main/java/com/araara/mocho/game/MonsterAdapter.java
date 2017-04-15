@@ -83,7 +83,7 @@ public class MonsterAdapter extends BaseAdapter {
         holder._exp.setMax(100);
         holder._exp.setProgress(monsterList[i].getLevel());
 
-        Picasso.with(context).load(DataModel.cover[i]).into(holder._cover);
+        Picasso.with(context).load(DataModel.cover[monsterList[i].getMonsterId()-1]).into(holder._cover);
         Picasso.with(context).load(R.drawable.bg).into(holder._background);
         return convertview;
     }

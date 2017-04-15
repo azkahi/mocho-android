@@ -72,7 +72,7 @@ public class GameActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(GameActivity.this);
         progressDialog.setMessage("Please wait, retrieving your monsters...");
         progressDialog.show();
-
+        
         user = FirebaseAuth.getInstance().getCurrentUser();
         RetrieveMonsterData retrieveMonsterData = new RetrieveMonsterData();
         retrieveMonsterData.execute("http://ranggarmaste.cleverapps.io/api/users/" + user.getDisplayName() + "/monsters");
