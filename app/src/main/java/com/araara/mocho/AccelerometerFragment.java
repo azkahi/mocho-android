@@ -172,14 +172,13 @@ public class AccelerometerFragment extends Fragment implements SensorEventListen
                 monsters = DataModel.parseMonster(parseMonsterString);
 
             int defVal = calculate(doubles[0]);
-            int newDef = defVal + monsters[idx].getDefense();
+            int newDef = defVal + monsters[idx].getAddedDef();
             Log.d(TAG, "doInBackground: newDef: " + newDef);
             int newHunger = monsters[idx].getHunger() - 50;
-            int idMonster = idx == 0 ? 2 : 4;
 
             String response = "";
             try {
-                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + idMonster);
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + monsters[idx].getId());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("PUT");
                 conn.setDoInput(true);

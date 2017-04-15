@@ -115,11 +115,10 @@ public class SubtypeActivity extends AppCompatActivity {
             String parseMonsterString = sharedPreferences.getString("OwnedMonster", "NONE");
             if (!parseMonsterString.equals("NONE"))
                 monsters = DataModel.parseMonster(parseMonsterString);
-            int idMonster = idx == 0 ? 2 : 4;
 
             String response = "";
             try {
-                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + idMonster);
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + monsters[idx].getId());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("PUT");
                 conn.setDoInput(true);

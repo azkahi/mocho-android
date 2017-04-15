@@ -164,14 +164,13 @@ public class GyroFragment extends Fragment implements SensorEventListener {
                 monsters = DataModel.parseMonster(parseMonsterString);
 
             int atkVal = calculate(doubles[0]);
-            int newAtk = atkVal + monsters[idx].getAttack();
+            int newAtk = atkVal + monsters[idx].getAddedAtk();
             Log.d(TAG, "doInBackground: newAtk: " + newAtk);
             int newHunger = monsters[idx].getHunger() - 50;
-            int idMonster = idx == 0 ? 2 : 4;
 
             String response = "";
             try {
-                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + idMonster);
+                URL url = new URL("http://ranggarmaste.cleverapps.io/api/users/" + username + "/monsters/" + monsters[idx].getId());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("PUT");
                 conn.setDoInput(true);

@@ -18,7 +18,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
     public static final String TAG = "DetailGameActivtity";
     int idx = -1;
     SharedPreferences sharedPreferences;
-    Monster[] monstersList;
+    Monster[] monsterList;
     AnimationDrawable frameAnimation;
     String parseMonsterString = "";
 
@@ -31,27 +31,20 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
         Log.d("DetailGame", sharedPreferences.getAll().toString());
         parseMonsterString = sharedPreferences.getString("OwnedMonster", "NONE");
         if (!parseMonsterString.equals("NONE"))
-            monstersList = DataModel.parseMonster(parseMonsterString);
+            monsterList = DataModel.parseMonster(parseMonsterString);
         Intent intent = getIntent();
         idx = intent.getIntExtra("idxmonster", -1);
 
         if (idx != -1) {
-            int idxmonster = DataModel.getIdxMonster(monstersList[idx].getName());
             TextView monstername = (TextView) findViewById(R.id.monster_name);
             ImageView bg = (ImageView) findViewById(R.id.cover_bg_details);
-            Log.d("Monster name", DataModel.monsters[idxmonster]);
-            monstername.setText(DataModel.monsters[idxmonster]);
-            Picasso.with(DetailGameActivity.this).load(DataModel.background[idxmonster]).into(bg);
+            monstername.setText(monsterList[idx].getName());
+            Picasso.with(DetailGameActivity.this).load(R.drawable.bg).into(bg);
 
-            // Load the ImageView that will host the animation and
-            // set its background to our AnimationDrawable XML resource.
             ImageView img = (ImageView) findViewById(R.id.monster_idle);
-            img.setImageResource(DataModel.idleanim[idxmonster]);
+            img.setImageResource(DataModel.idleanim[idx]);
 
-            // Get the background, which has been compiled to an AnimationDrawable object.
             frameAnimation = (AnimationDrawable) img.getDrawable();
-
-            // Start the animation (looped playback by default).
             frameAnimation.start();
         }
 
@@ -61,13 +54,11 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             }
             DetailMenu menuFragment = new DetailMenu();
             Bundle bundle = new Bundle();
-            bundle.putInt("subtype", monstersList[idx].getSubtype());
+            bundle.putInt("subtype", monsterList[idx].getSubtype());
             menuFragment.setArguments(bundle);
             Log.d(TAG, "Loaded fragment");
-
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, menuFragment).commit();
-
             Log.d(TAG, "FragmentLoading");
         }
 
@@ -86,15 +77,6 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
 
     @Override
     public void onMenuClicked(String menu) {
-//        Fragment fragment;
-//        if (menu.equals("TRAIN")) {
-//            fragment = new SensorMenuFragment();
-//        } else if(menu.equals("FEED")) {
-//            fragment = new AccelerometerFragment();
-//        } else {
-//            // Insert fragment map here
-//            fragment = new GyroFragment();
-//        }
         if (menu.equals("TRAIN")) {
             Intent intent = new Intent(this, SensorActivity.class);
             intent.putExtra("idxmonster", idx);

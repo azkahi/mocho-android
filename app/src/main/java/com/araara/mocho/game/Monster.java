@@ -1,5 +1,7 @@
 package com.araara.mocho.game;
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -7,34 +9,75 @@ import java.io.Serializable;
  */
 
 public class Monster implements Serializable {
+    private int id;
+    private int monsterId;
     private String name;
     private String type;
-    private int subtype;
-    private int hunger;
-    private int HP;
-    private int SP;
+    private int addedAtk;
+    private int addedDef;
+    private int addedRec;
+    private int addedHP;
+    private int addedSP;
+    private int totalAtk;
+    private int totalDef;
+    private int totalRec;
+    private int totalHP;
+    private int totalSP;
     private int exp;
-    private int attack;
-    private int defense;
-    private int recovery;
-    private int id;
+    private int level;
+    private int hunger;
+    private int subtype;
+
+    public Monster(JSONObject ownedMonster) {
+        try {
+            JSONObject monster = ownedMonster.getJSONObject("Monster");
+            id = ownedMonster.getInt("id");
+            monsterId = monster.getInt("id");
+            name = ownedMonster.getString("name");
+            type = monster.getString("type");
+            exp = ownedMonster.getInt("exp");
+            level = exp / 100;
+            addedAtk = ownedMonster.getInt("addedAtk");
+            addedDef = ownedMonster.getInt("addedDef");
+            addedHP = ownedMonster.getInt("addedHP");
+            addedSP = ownedMonster.getInt("addedSP");
+            addedRec = ownedMonster.getInt("addedRec");
+            totalAtk = calculateStatus(ownedMonster, monster, "Atk", level);
+            totalDef = calculateStatus(ownedMonster, monster, "Def", level);;
+            totalRec = calculateStatus(ownedMonster, monster, "Rec", level);;
+            totalHP = calculateStatus(ownedMonster, monster, "HP", level);;
+            totalSP = calculateStatus(ownedMonster, monster, "SP", level);;
+            hunger = ownedMonster.getInt("hunger");
+            subtype = ownedMonster.getInt("subtype");
+        } catch (Exception e) {
+
+        }
+    }
+
+    public int calculateStatus(JSONObject ownedMonster, JSONObject monster, String status, int level) {
+        try {
+            return ownedMonster.getInt("added" + status)
+                    + monster.getInt("init" + status)
+                    + monster.getInt("incr" + status) * (level - 1);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
 
     public int getId() {
         return id;
     }
 
-    public Monster(String name, String type, int subtype, int hunger, int HP, int SP, int exp, int attack, int defense, int recovery, int id) {
-        this.name = name;
-        this.type = type;
-        this.subtype = subtype;
-        this.hunger = hunger;
-        this.HP = HP;
-        this.SP = SP;
-        this.exp = exp;
-        this.attack = attack;
-        this.defense = defense;
-        this.recovery = recovery;
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getMonsterId() {
+        return monsterId;
+    }
+
+    public void setMonsterId(int monsterId) {
+        this.monsterId = monsterId;
     }
 
     public String getName() {
@@ -53,37 +96,85 @@ public class Monster implements Serializable {
         this.type = type;
     }
 
-    public int getSubtype() {
-        return subtype;
+    public int getTotalAtk() {
+        return totalAtk;
     }
 
-    public void setSubtype(int subtype) {
-        this.subtype = subtype;
+    public void setTotalAtk(int totalAtk) {
+        this.totalAtk = totalAtk;
     }
 
-    public int getHunger() {
-        return hunger;
+    public int getTotalDef() {
+        return totalDef;
     }
 
-    public void setHunger(int hunger) {
-        this.hunger = hunger;
-        if (this.hunger > 500) this.hunger = 0;
+    public void setTotalDef(int totalDef) {
+        this.totalDef = totalDef;
     }
 
-    public int getHP() {
-        return HP;
+    public int getTotalRec() {
+        return totalRec;
     }
 
-    public void setHP(int HP) {
-        this.HP = HP;
+    public int getAddedAtk() {
+        return addedAtk;
     }
 
-    public int getSP() {
-        return SP;
+    public void setAddedAtk(int addedAtk) {
+        this.addedAtk = addedAtk;
     }
 
-    public void setSP(int SP) {
-        this.SP = SP;
+    public int getAddedDef() {
+        return addedDef;
+    }
+
+    public void setAddedDef(int addedDef) {
+        this.addedDef = addedDef;
+    }
+
+    public int getAddedRec() {
+        return addedRec;
+    }
+
+    public void setAddedRec(int addedRec) {
+        this.addedRec = addedRec;
+    }
+
+    public int getAddedHP() {
+        return addedHP;
+    }
+
+    public void setAddedHP(int addedHP) {
+        this.addedHP = addedHP;
+    }
+
+    public int getAddedSP() {
+        return addedSP;
+    }
+
+    public void setAddedSP(int addedSP) {
+        this.addedSP = addedSP;
+    }
+
+    public void setTotalRec(int totalRec) {
+        this.totalRec = totalRec;
+
+    }
+
+    public int getTotalHP() {
+        return totalHP;
+    }
+
+    public void setTotalHP(int totalHP) {
+        this.totalHP = totalHP;
+    }
+
+    public int getTotalSP() {
+        return totalSP;
+    }
+
+    public void setTotalSP(int totalSP) {
+        this.totalSP = totalSP;
     }
 
     public int getExp() {
@@ -94,27 +185,27 @@ public class Monster implements Serializable {
         this.exp = exp;
     }
 
-    public int getAttack() {
-        return attack;
+    public int getLevel() {
+        return level;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
-    public int getDefense() {
-        return defense;
+    public int getHunger() {
+        return hunger;
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
     }
 
-    public int getRecovery() {
-        return recovery;
+    public int getSubtype() {
+        return subtype;
     }
 
-    public void setRecovery(int recovery) {
-        this.recovery = recovery;
+    public void setSubtype(int subtype) {
+        this.subtype = subtype;
     }
 }

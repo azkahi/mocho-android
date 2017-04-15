@@ -1,7 +1,6 @@
 package com.araara.mocho.game;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +20,12 @@ public class MonsterAdapter extends BaseAdapter {
     private Context context;
     private Monster[] monsterList;
     private LayoutInflater inflater = null;
-
-
+    
     public MonsterAdapter(Context con, Monster[] monsterList) {
         this.monsterList = monsterList;
         this.context = con;
         inflater = LayoutInflater.from(context);
     }
-
 
     @Override
     public int getCount() {
@@ -48,11 +45,9 @@ public class MonsterAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View convertview, ViewGroup viewGroup) {
         ViewHolder holder;
-        if(convertview == null) {
-
+        if (convertview == null) {
             convertview =inflater.inflate(R.layout.card_item_template,null);
             holder = new ViewHolder();
-
             holder._cover = (ImageView) convertview.findViewById(R.id.img_cover_d);
             holder._background = (ImageView) convertview.findViewById(R.id.img_background);
             holder._monsterdetail = (TextView) convertview.findViewById(R.id.txt_monster_details);
@@ -61,50 +56,39 @@ public class MonsterAdapter extends BaseAdapter {
             holder._exp = (ProgressBar) convertview.findViewById(R.id.progressBar2);
             holder._txt1 = (TextView) convertview.findViewById(R.id.textView);
             holder._txt2 = (TextView) convertview.findViewById(R.id.textView2);
-
             convertview.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertview.getTag();
         }
 
-        int idxInitMonster = DataModel.getIdxMonster(monsterList[i].getName());
-        int idxMonster = i;
-
         // Calculating current stats
-        int level = monsterList[idxMonster].getExp() / 100;
-        int HP = DataModel.initHP[idxInitMonster] + monsterList[idxMonster].getHP();
-        int SP = DataModel.initSP[idxInitMonster] + monsterList[idxMonster].getSP();
-        int Atk = DataModel.initAtk[idxInitMonster] + monsterList[idxMonster].getAttack();
-        int Def = DataModel.initDef[idxInitMonster] + monsterList[idxMonster].getDefense();
-        int Rec = DataModel.initRec[idxInitMonster] + monsterList[idxMonster].getRecovery();
+        int level = monsterList[i].getLevel();
+        int HP = monsterList[i].getTotalHP();
+        int SP = monsterList[i].getTotalSP();
+        int Atk = monsterList[i].getTotalAtk();
+        int Def = monsterList[i].getTotalDef();
+        int Rec = monsterList[i].getTotalRec();
         String desc = "Level: " + level + "\nHP: " + HP + " SP: " + SP + "\nAtk: " + Atk + " Def: " + Def + " Rec: " + Rec;
 
         // Setup Holder
         holder._txt1.setText("Hunger");
         holder._txt2.setText("EXP");
 
-        holder._monsterdetail.setText(DataModel.monsters[idxInitMonster]);
+        holder._monsterdetail.setText(monsterList[i].getName());
         holder._monsterdesc.setText(desc);
 
         holder._hunger.setMax(500);
-        holder._hunger.setProgress(monsterList[idxMonster].getHunger());
+        holder._hunger.setProgress(monsterList[i].getHunger());
 
-        Log.d("HUNGER:", "" + monsterList[idxMonster].getHunger());
         holder._exp.setMax(100);
-        holder._exp.setProgress(monsterList[idxMonster].getExp() % 100);
+        holder._exp.setProgress(monsterList[i].getLevel());
 
-        //holder._cover.setImageResource(DataModel.cover[idxInitMonster]);
-        Picasso.with(context).load(DataModel.cover[idxInitMonster]).into(holder._cover);
-        //holder._background.setImageResource(DataModel.background[0]);
-        Picasso.with(context).load(DataModel.background[0]).into(holder._background);
-
-
+        Picasso.with(context).load(DataModel.cover[i]).into(holder._cover);
+        Picasso.with(context).load(R.drawable.bg).into(holder._background);
         return convertview;
     }
 
     public class ViewHolder {
-
         TextView _txt1;
         TextView _txt2;
         ImageView _cover;
@@ -113,7 +97,5 @@ public class MonsterAdapter extends BaseAdapter {
         TextView _monsterdesc;
         ProgressBar _hunger;
         ProgressBar _exp;
-
-
     }
 }
