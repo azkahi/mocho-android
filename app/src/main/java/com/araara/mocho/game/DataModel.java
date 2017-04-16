@@ -1,5 +1,7 @@
 package com.araara.mocho.game;
 
+import android.util.Log;
+
 import com.araara.mocho.R;
 
 import org.json.JSONArray;
@@ -11,6 +13,7 @@ import org.json.JSONObject;
  */
 
 public class DataModel {
+    private static final String TAG = "DataModel";
     public static int cover[] = {
             R.drawable.puta,
             R.drawable.ina
@@ -26,6 +29,7 @@ public class DataModel {
         try {
             JSONArray ArrayMonster = new JSONArray(Jarr);
             monsterList = new Monster[ArrayMonster.length()];
+            Log.d(TAG, "parseMonster: length: " + monsterList.length);
             for (int i = 0; i < ArrayMonster.length(); i++) {
                 monsterList[i] = new Monster(ArrayMonster.getJSONObject(i));
             }

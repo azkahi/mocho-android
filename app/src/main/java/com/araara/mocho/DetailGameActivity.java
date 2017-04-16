@@ -42,7 +42,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             Picasso.with(DetailGameActivity.this).load(R.drawable.bg).into(bg);
 
             ImageView img = (ImageView) findViewById(R.id.monster_idle);
-            img.setImageResource(DataModel.idleanim[idx]);
+            img.setImageResource(DataModel.idleanim[monsterList[idx].getMonsterId()-1]);
 
             frameAnimation = (AnimationDrawable) img.getDrawable();
             frameAnimation.start();
