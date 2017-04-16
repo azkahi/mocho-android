@@ -27,7 +27,7 @@ public class SuccessDialogFragment extends DialogFragment {
                         public void onClick(DialogInterface dialog, int id) {
                             if (state == null) {
                                 Intent intent = new Intent(getActivity(), GameActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 getActivity().finish();
                             }
@@ -41,7 +41,7 @@ public class SuccessDialogFragment extends DialogFragment {
                         public void onClick(DialogInterface dialog, int id) {
                             if (state == null) {
                                 Intent intent = new Intent(getActivity(), GameActivity.class);
-                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
                                 getActivity().finish();
                             }
