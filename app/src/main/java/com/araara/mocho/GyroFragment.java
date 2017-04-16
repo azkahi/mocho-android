@@ -70,9 +70,9 @@ public class GyroFragment extends Fragment implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 mSensorManager.registerListener(GyroFragment.this, mGyroscope, SensorManager.SENSOR_DELAY_NORMAL);
-                new CountDownTimer(5000, 1000) {
+                new CountDownTimer(5000, 100) {
                     public void onTick(long millisUntilFinished) {
-                        tvTime.setText(millisUntilFinished / 1000 + " s");
+                        tvTime.setText((millisUntilFinished / 1000) + "." + ((millisUntilFinished / 100) % 10) + " s");
                     }
 
                     public void onFinish() {
