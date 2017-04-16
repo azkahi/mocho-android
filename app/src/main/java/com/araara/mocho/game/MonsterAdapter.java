@@ -46,7 +46,7 @@ public class MonsterAdapter extends BaseAdapter {
     public View getView(int i, View convertview, ViewGroup viewGroup) {
         ViewHolder holder;
         if (convertview == null) {
-            convertview =inflater.inflate(R.layout.card_item_template,null);
+            convertview = inflater.inflate(R.layout.card_item_template,null);
             holder = new ViewHolder();
             holder._cover = (ImageView) convertview.findViewById(R.id.img_cover_d);
             holder._background = (ImageView) convertview.findViewById(R.id.img_background);
@@ -55,33 +55,31 @@ public class MonsterAdapter extends BaseAdapter {
             holder._hunger = (ProgressBar) convertview.findViewById(R.id.progressBar);
             holder._exp = (ProgressBar) convertview.findViewById(R.id.progressBar2);
             holder._txt1 = (TextView) convertview.findViewById(R.id.textView);
-            holder._txt2 = (TextView) convertview.findViewById(R.id.textView2);
+            holder.tvExp = (TextView) convertview.findViewById(R.id.tvExp);
+            holder.tvLevel = (TextView) convertview.findViewById(R.id.tvLevel);
             convertview.setTag(holder);
         } else {
             holder = (ViewHolder) convertview.getTag();
         }
 
         // Calculating current stats
-        int level = monsterList[i].getLevel();
         int HP = monsterList[i].getTotalHP();
         int SP = monsterList[i].getTotalSP();
         int Atk = monsterList[i].getTotalAtk();
         int Def = monsterList[i].getTotalDef();
         int Rec = monsterList[i].getTotalRec();
-        String desc = "Level: " + level + "\nHP: " + HP + " SP: " + SP + "\nAtk: " + Atk + " Def: " + Def + " Rec: " + Rec;
+        String desc = "HP: " + HP + " SP: " + SP + "\nAtk: " + Atk + " Def: " + Def + " Rec: " + Rec;
 
         // Setup Holder
-        holder._txt1.setText("Hunger");
-        holder._txt2.setText("EXP");
-
+        holder._txt1.setText("Hunger: " + monsterList[i].getHunger() + "/100");
         holder._monsterdetail.setText(monsterList[i].getName());
         holder._monsterdesc.setText(desc);
-
-        holder._hunger.setMax(500);
+        holder._hunger.setMax(100);
         holder._hunger.setProgress(monsterList[i].getHunger());
-
         holder._exp.setMax(100);
-        holder._exp.setProgress(monsterList[i].getLevel());
+        holder._exp.setProgress(monsterList[i].getExp() % 100);
+        holder.tvLevel.setText("Level " + monsterList[i].getLevel());
+        holder.tvExp.setText("Next: " + (monsterList[i].getExp() % 100) + "/100");
 
         Picasso.with(context).load(DataModel.cover[monsterList[i].getMonsterId()-1]).into(holder._cover);
         Picasso.with(context).load(R.drawable.bg).into(holder._background);
@@ -90,11 +88,12 @@ public class MonsterAdapter extends BaseAdapter {
 
     public class ViewHolder {
         TextView _txt1;
-        TextView _txt2;
         ImageView _cover;
         ImageView _background;
         TextView _monsterdetail;
         TextView _monsterdesc;
+        TextView tvLevel;
+        TextView tvExp;
         ProgressBar _hunger;
         ProgressBar _exp;
     }

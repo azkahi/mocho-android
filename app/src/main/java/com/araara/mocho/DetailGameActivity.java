@@ -55,6 +55,7 @@ public class DetailGameActivity extends AppCompatActivity implements DetailMenu.
             DetailMenu menuFragment = new DetailMenu();
             Bundle bundle = new Bundle();
             bundle.putInt("subtype", monsterList[idx].getSubtype());
+            bundle.putInt("hunger", monsterList[idx].getHunger());
             menuFragment.setArguments(bundle);
             Log.d(TAG, "Loaded fragment");
             getSupportFragmentManager().beginTransaction()
